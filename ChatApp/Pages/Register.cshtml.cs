@@ -29,7 +29,7 @@ namespace ChatApp.Pages
             {
                 var user = new IdentityUser()
                 {
-                    UserName = Model.Email,
+                    UserName = Model.UserName,
                     Email = Model.Email
                 };
                 var result = await _userManager.CreateAsync(user, Model.Password);

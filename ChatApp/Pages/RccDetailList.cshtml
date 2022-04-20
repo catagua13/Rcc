@@ -1,0 +1,96 @@
+﻿@page
+@model ChatApp.Pages.RccDetailListModel
+
+@{
+    ViewData["Title"] = "RccDetailList";
+}
+
+<h1>RccDetailList</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].CollaboratorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].Phoneline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].ValueServices)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].ValueDevices)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].Fee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].TotalFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].PaidBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].Subsidy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].Group)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RccDetail[0].CICollaborator)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.RccDetail) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollaboratorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phoneline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValueServices)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValueDevices)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaidBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subsidy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CICollaborator)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RccDetailId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.RccDetailId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.RccDetailId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

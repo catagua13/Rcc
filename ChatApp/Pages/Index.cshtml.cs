@@ -1,20 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using ChatApp.ViewModels;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
 
 namespace ChatApp.Pages
 {
 
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        private readonly ChatApp.Data.DataContext _context;
+        
+        public IndexModel(ChatApp.Data.DataContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public void OnGet()
-        {
+        public IList<Rcc> Rcc { get; set; }    
 
+        public async Task OnGetAsync()
+        {
+            Rcc = await _context.Rccs.ToListAsync();
         }
+
+        
+        
     }
 }

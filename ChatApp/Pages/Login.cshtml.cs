@@ -29,12 +29,12 @@ namespace ChatApp.Pages
         {
             if (ModelState.IsValid)
             {
-                var IdentityResult = await _signInManager.PasswordSignInAsync(Model.Email, Model.Password, Model.RememberMe, false);
+                var IdentityResult = await NewMethod();
                 if (IdentityResult.Succeeded)
                 {
                     if (returnUrl1 == null || returnUrl1 == "/")
                     {
-                        return RedirectToPage("Chat");
+                        return RedirectToPage("Index");
                     }
                     else
                     {
@@ -47,7 +47,10 @@ namespace ChatApp.Pages
             return Page();
         }
 
-
+        private Task<Microsoft.AspNetCore.Identity.SignInResult> NewMethod()
+        {
+            return _signInManager.PasswordSignInAsync(Model.UserName, Model.Password, Model.RememberMe, false);
+        }
     }
 
 

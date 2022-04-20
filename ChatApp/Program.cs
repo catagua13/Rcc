@@ -1,7 +1,9 @@
 global using Microsoft.EntityFrameworkCore;
-using ChatApp.Hubs;
+using ChatApp;
 using ChatApp.Data;
 using Microsoft.AspNetCore.Identity;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +14,13 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"));
 });
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DataContext>();
+
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.LoginPath = "/Login";
 });
 
-builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +40,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-app.MapHub<ChatHub>("/chatHub");
+
 
 app.Run();

@@ -17,10 +17,94 @@ namespace ChatApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ChatApp.ViewModels.Rcc", b =>
+                {
+                    b.Property<int>("RccId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RccId"), 1L, 1);
+
+                    b.Property<decimal>("CompanyTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("EquipmentTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("RCCDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RccDetailId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ServiceTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("account")
+                        .HasColumnType("int");
+
+                    b.HasKey("RccId");
+
+                    b.ToTable("Rcc", (string)null);
+                });
+
+            modelBuilder.Entity("ChatApp.ViewModels.RccDetail", b =>
+                {
+                    b.Property<int>("RccDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RccDetailId"), 1L, 1);
+
+                    b.Property<short>("CICollaborator")
+                        .HasColumnType("smallint");
+
+                    b.Property<Guid>("CollaboratorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Fee")
+                        .HasColumnType("int");
+
+                    b.Property<short>("Group")
+                        .HasColumnType("smallint");
+
+                    b.Property<bool>("PaidBy")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Phoneline")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int?>("RccId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Subsidy")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TotalFee")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValueDevices")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValueServices")
+                        .HasColumnType("int");
+
+                    b.HasKey("RccDetailId");
+
+                    b.HasIndex("RccId");
+
+                    b.ToTable("RccDetail", (string)null);
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -220,6 +304,13 @@ namespace ChatApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ChatApp.ViewModels.RccDetail", b =>
+                {
+                    b.HasOne("ChatApp.ViewModels.Rcc", null)
+                        .WithMany("RccDetails")
+                        .HasForeignKey("RccId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -269,6 +360,11 @@ namespace ChatApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ChatApp.ViewModels.Rcc", b =>
+                {
+                    b.Navigation("RccDetails");
                 });
 #pragma warning restore 612, 618
         }
